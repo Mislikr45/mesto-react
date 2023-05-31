@@ -10,4 +10,4 @@
 
 
 #### Ссылка на работу
-https://mislikr45.github.io/mesto/
+https://mislikr45.github.io/mesto-react/
