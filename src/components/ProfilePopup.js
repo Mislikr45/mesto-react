@@ -36,5 +36,5 @@ function ProfilePopup({ isOpen, onClose }) {
     </PopupWithForm>
   );
 }
-
+ 
 export default ProfilePopup;

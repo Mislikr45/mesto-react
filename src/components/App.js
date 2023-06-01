@@ -19,9 +19,8 @@ function App() {
   const [isEditProfilePopupOpen, setProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddCardPopupOpen] = useState(false);
   const [isTrashPopupOpen, setTrashPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(false);
-  const [userProfile, setUserProfile] = useState([]);
-  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
+ 
 
   // Открытие попапов
   function handleEditAvatarClick() {
@@ -50,22 +49,10 @@ function App() {
     setProfilePopupOpen(false);
     setAddCardPopupOpen(false);
     setTrashPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({name: '', link: ''})
   }
 
-  // Профиль с сервера
-  React.useEffect(() => {
-    api.getUserInfo().then((user) => {
-      setUserProfile(user);
-    });
-  }, []);
 
-  // Карточки с сервера
-  React.useEffect(() => {
-    api.getCardInfo().then((cards) => {
-      setCards(cards);
-    });
-  }, []);
 
   return (
     <div className="App">
@@ -77,8 +64,8 @@ function App() {
           onEditAvatar={handleEditAvatarClick}
           onDeleteCard={handleDeleteCard}
           onCardClick={handleCardClick}
-          profile={userProfile}
-          setCards={cards}
+          // profile={userProfile}
+          // setCards={cards}
         />
 
         <Footer />
@@ -98,7 +85,6 @@ function App() {
         />
 
         <ImagePopup
-          isOpen={selectedCard}
           onClose={closeAllPopups}
           card={selectedCard}
         />

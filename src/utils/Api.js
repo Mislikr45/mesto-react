@@ -4,7 +4,7 @@ export default class Api {
     this._headers = headers;
   }
 
-  _failData(res) {
+  _checkResponse(res) {
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
@@ -14,14 +14,14 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then(this._failData);
+    }).then(this._checkResponse);
   }
 
   getCardInfo() {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then(this._failData);
+    }).then(this._checkResponse);
   }
 
   editeProfile({ name, about }) {
@@ -32,7 +32,7 @@ export default class Api {
         name,
         about,
       }),
-    }).then(this._failData);
+    }).then(this._checkResponse);
   }
 
   editeAvatar({ avatar }) {
@@ -42,7 +42,7 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
-    }).then(this._failData);
+    }).then(this._checkResponse);
   }
 
   handleAddCardApi({ name, link }) {
@@ -53,14 +53,14 @@ export default class Api {
         name: name,
         link: link,
       }),
-    }).then(this._failData);
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._failData);
+    }).then(this._checkResponse);
   }
 
   toggleLike(cardId, isLiked) {
@@ -69,13 +69,13 @@ export default class Api {
         method: "PUT",
         headers: this._headers,
       })
-      .then(this._failData);
+      .then(this._checkResponse);
     } else {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: "DELETE",
         headers: this._headers,
       })
-      .then(this._failData);
+      .then(this._checkResponse);
     }
   }
 }

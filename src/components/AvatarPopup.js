@@ -1,6 +1,6 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-
+ 
 function AvatarPopup({ isOpen, onClose }) {
   return (
     <PopupWithForm

@@ -36,3 +36,4 @@ function CardPopup({ isOpen, onClose }) {
 }
 
 export default CardPopup;
+ 

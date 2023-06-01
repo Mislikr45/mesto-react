@@ -1,5 +1,5 @@
 import React from 'react';
-
+ 
 
 function Card({card, deleteCard, onCardClick}) {   
 
@@ -8,7 +8,7 @@ onCardClick(card);
 }  
   return (        
       <div className="card-item">
-        <button className="card-item__trash" onClick={deleteCard}></button>
+        <button className="card-item__trash" onClick={deleteCard}/>
         <img  
         alt={card.about}
          src={card.link} 
