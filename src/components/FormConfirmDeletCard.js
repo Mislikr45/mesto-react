@@ -14,4 +14,3 @@ function FormConfirmDeletCard({ isOpen, onClose }) {
 }
 
 export default FormConfirmDeletCard;
- 

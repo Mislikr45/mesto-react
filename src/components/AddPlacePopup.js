@@ -1,9 +1,8 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import { useState} from "react";
+import { useState } from "react";
 
-function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
-
+function AddPlacePopup({ isOpen, onClose, onUpdateCard }) {
   const [card, setCard] = useState({});
 
   function handleChange(evt) {
@@ -11,14 +10,14 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
   }
 
   function clearInput() {
-    card.name=""
-    card.link=""  }
+    card.name = "";
+    card.link = "";
+  }
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onUpdateCard(card);
     clearInput();
-  
   }
 
   return (
@@ -40,7 +39,7 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
         minLength="2"
         maxLength="30"
         onChange={handleChange}
-        value={card.name ?? ''}
+        value={card.name ?? ""}
       />
       <span className="place-error popup__input-error"></span>
 
@@ -52,7 +51,7 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
         placeholder="Ссылка на картинку"
         required
         onChange={handleChange}
-        value={card.link ?? ''}
+        value={card.link ?? ""}
       />
       <span className="link-error popup__input-error"></span>
     </PopupWithForm>
@@ -60,4 +59,3 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCard}) {
 }
 
 export default AddPlacePopup;
- 

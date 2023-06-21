@@ -1,7 +1,7 @@
 import React from "react";
 
 import Card from "../components/Card.js";
-import { api } from "../utils/Api";
+
 
 function Main({
   onEditProfile,
@@ -12,10 +12,8 @@ function Main({
   currentUser,
   cards,
   onCardLike,
-  onCardDelete
+  onCardDelete,
 }) {
-
-
   return (
     <main className="content">
       <section className="profile">
@@ -25,7 +23,11 @@ function Main({
             type="button"
             onClick={onEditAvatar}
           >
-            <img className="profile__avatar" alt="фото" src={currentUser.avatar} />
+            <img
+              className="profile__avatar"
+              alt="фото"
+              src={currentUser.avatar}
+            />
           </button>
           <div className="profile__main">
             <h1 className="profile__name">{currentUser.name}</h1>
@@ -58,9 +60,9 @@ function Main({
             />
           );
         })}
-      </section> 
+      </section>
     </main>
   );
 }
- 
+
 export default Main;

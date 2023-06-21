@@ -1,6 +1,6 @@
 import React from "react";
 
-function ImagePopup({ card, onClose}) {
+function ImagePopup({ card, onClose }) {
   const popupClass = `popup popup_type_img-zoom ${
     card.link ? "popup_opened" : ""
   }`;
@@ -17,5 +17,5 @@ function ImagePopup({ card, onClose}) {
     </div>
   );
 }
- 
+
 export default ImagePopup;

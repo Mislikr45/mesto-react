@@ -4,40 +4,37 @@ import { useState } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
+  // Подписка на контекст
+  const currentUser = React.useContext(CurrentUserContext);
 
+  // После загрузки текущего пользователя из API
+  // его данные будут использованы в управляемых компонентах.
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
 
-// Подписка на контекст
-const currentUser = React.useContext(CurrentUserContext);
+  function handleChange(e) {
+    setName(e.target.value);
+  }
 
-// После загрузки текущего пользователя из API
-// его данные будут использованы в управляемых компонентах.
-React.useEffect(() => {
-  setName(currentUser.name);
-  setDescription(currentUser.about);
-}, [currentUser]); 
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
+  }
 
-function handleChange(e) {
-  setName(e.target.value);  
-}
+  function handleSubmit(e) {
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
 
-function handleChangeDescription(e) {  
-  setDescription(e.target.value);
-}
-
-function handleSubmit(e) {
-  // Запрещаем браузеру переходить по адресу формы
-  e.preventDefault();
-
-  // Передаём значения управляемых компонентов во внешний обработчик
-  onUpdateUser({
-    name:name,
-    about: description,
-  });
-} 
-
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name: name,
+      about: description,
+    });
+  }
 
   return (
     <PopupWithForm
@@ -78,5 +75,5 @@ function handleSubmit(e) {
     </PopupWithForm>
   );
 }
- 
+
 export default EditProfilePopup;
