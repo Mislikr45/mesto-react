@@ -1,7 +1,24 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import { useEffect, useRef } from "react";
  
-function AvatarPopup({ isOpen, onClose }) {
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar}) {
+
+  
+
+  useEffect(() => {
+    isOpen && (inputRef.current.value = "");
+  }, [isOpen]);
+  const inputRef = useRef(0);
+
+  function handleSubmit(e) {
+    e.preventDefault();  
+  
+    onUpdateAvatar({
+      avatar:inputRef.current.value
+    })    
+  } 
+
   return (
     <PopupWithForm
       name="avatar"
@@ -9,6 +26,7 @@ function AvatarPopup({ isOpen, onClose }) {
       buttonText="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
       <input
         type="url"
@@ -17,10 +35,13 @@ function AvatarPopup({ isOpen, onClose }) {
         name="avatar"
         placeholder="Ссылка на аватар"
         required
+        // defaultValue={inputRef.current.value || ''}
+        ref={inputRef}
+        
       />
       <span className="url-error popup__input-error"></span>
     </PopupWithForm>
   );
 }
 
-export default AvatarPopup;
+export default EditAvatarPopup;

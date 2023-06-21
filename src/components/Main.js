@@ -1,5 +1,5 @@
 import React from "react";
-import {  useEffect, useState } from "react";
+
 import Card from "../components/Card.js";
 import { api } from "../utils/Api";
 
@@ -9,30 +9,12 @@ function Main({
   onEditAvatar,
   onDeleteCard,
   onCardClick,
+  currentUser,
+  cards,
+  onCardLike,
+  onCardDelete
 }) {
 
-  const [userProfile, setUserProfile] = useState({});
-  const [cards, setCards] = useState([]);
-
-    // Профиль с сервера
-    React.useEffect(() => {
-      api.getUserInfo().then((user) => {
-        setUserProfile(user);
-      }).catch((err) => {
-        console.log(err);
-      })
-    }, []);
-  
-  
-    // Карточки с сервера
-    React.useEffect(() => {
-      api.getCardInfo().then((cards) => {        
-        setCards(cards);
-      }).catch((err) => {
-        console.log(err);
-      })
-    }, []);
- 
 
   return (
     <main className="content">
@@ -43,16 +25,16 @@ function Main({
             type="button"
             onClick={onEditAvatar}
           >
-            <img className="profile__avatar" alt="фото" src={userProfile.avatar} />
+            <img className="profile__avatar" alt="фото" src={currentUser.avatar} />
           </button>
           <div className="profile__main">
-            <h1 className="profile__name">{userProfile.name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               className="profile__edite"
               type="button"
               onClick={onEditProfile}
             ></button>
-            <p className="profile__about">{userProfile.about}</p>
+            <p className="profile__about">{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -70,10 +52,13 @@ function Main({
               key={card._id}
               deleteCard={onDeleteCard}
               onCardClick={onCardClick}
+              currentUser={currentUser}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           );
         })}
-      </section>
+      </section> 
     </main>
   );
 }
