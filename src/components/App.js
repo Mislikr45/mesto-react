@@ -60,8 +60,8 @@ function App() {
     setAddCardPopupOpen(true);
   }
 
-  function handleDeleteCard() {
-    setTrashPopupOpen(true);
+  function handleDeleteCard(card) {
+    setTrashPopupOpen(card);     
   }
 
   const handleCardClick = (card) => {
@@ -90,7 +90,9 @@ function App() {
   function handleCardDelete(card) {
     //   // Отправляем запрос в API и получаем обновлённые данные карточки
     api.deleteCard(card._id).then((item) => {
-      setCards(cards.filter((item) => item._id !== card._id));
+      setCards((prevState)=>prevState.filter((item) => item._id !== card._id));
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
@@ -98,6 +100,8 @@ function App() {
     api.editeProfile(name, about).then((profile) => {
       setCurrentUser(profile);
       closeAllPopups();
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
@@ -165,6 +169,7 @@ function App() {
           <FormConfirmDeletCard
             isOpen={isTrashPopupOpen}
             onClose={closeAllPopups}
+            
           />
 
           <ImagePopup onClose={closeAllPopups} card={selectedCard} />
